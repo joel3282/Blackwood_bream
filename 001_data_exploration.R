@@ -9,24 +9,41 @@ library(tidyverse)
 dat <- read_csv("Data/Blackwood-data.csv")
 
 # dat1 = only samples where data for prey IS available
-# dat2 = prey NOT included as a factor
-# dat3 = 'plugging' NAs in predictor variable purely for data exploration
+
+# dat2 = 'plugging' NAs in predictor variable purely for data exploration
+# dat3 = prey NOT included as a factor
 
 
+# dat1 exploration
+dat1 <- as.data.frame(dat)
+glimpse(dat1)
 
+plot(dat1$Temp, dat1$Eggs)
+plot(dat1$Sal, dat1$Eggs)
+plot(dat1$DO, dat1$Eggs)
 
-dat <- as.data.frame(dat)
-class(dat)
-glimpse(dat)
+plot(dat1$Temp, dat1$Feeding)
+plot(dat1$Sal, dat1$Feeding)
+plot(dat1$DO, dat1$Feeding)
 
-as.numeric(dat$Eggs)
+plot(dat1$Plank_vol, dat1$Feeding)
+plot(dat1$Naupli, dat1$Feeding)
+
 hist(dat$Eggs)
+hist(dat1$Yolk_sac)
+hist(dat1$Feeding)
 
+# dat2 exploration
+dat2 <- dat1
+str(dat2)
+colSums(is.na(dat2))  
 
+set.seed(12345678)
 
-
-
-
-
-# model concept
-y1:3 ~ . + (1|Depth/Site) + (1|Month)
+Extract <- dat2 %>% sele %>% 
+  rfImputeUnsupervised() %>% 
+  within({
+    Turb <- round(Turb)
+    Naupli <- round(Naupli)
+  })
+dat2[.,names(Extract)] <- Extract
