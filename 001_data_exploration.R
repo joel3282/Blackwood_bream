@@ -5,12 +5,28 @@
 
 library(tidyverse)
 
+# read in data
 dat <- read_csv("Data/Blackwood-data.csv")
+
+# dat1 = only samples where data for prey IS available
+# dat2 = prey NOT included as a factor
+# dat3 = 'plugging' NAs in predictor variable purely for data exploration
+
+
+
+
 dat <- as.data.frame(dat)
 class(dat)
 glimpse(dat)
 
-dat %>%
-  as.numeric(Eggs) %>% 
-  dat %>% 
-  hist(Eggs)
+as.numeric(dat$Eggs)
+hist(dat$Eggs)
+
+
+
+
+
+
+
+# model concept
+y1:3 ~ . + (1|Depth/Site) + (1|Month)
