@@ -35,17 +35,10 @@ rm(list=ls())
 
 # GAMM models----
 
-#name<-"snapper"
-
-
 # Read in data----
+dat<-read.csv("Data/Blackwood-data.csv") %>% 
+  
 
-dat<-read.csv("Data/Blackwood-data.csv")
-
-# Need for two datasets as there are NAs for prey data due to sampling not being collected.
-
-# dat1 = only samples where data for prey IS available
-# dat2 = prey NOT included as a factor
 
 %>%
   select(-no3_m,-po4_m, -sst1961_20)%>% # drop these as they have NA's

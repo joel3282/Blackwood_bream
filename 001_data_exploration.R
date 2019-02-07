@@ -1,9 +1,14 @@
 # Williams et al 2019 
 # Update Feb 2019
 
+rm(list=ls())
+
+
 ##### Data preperation and exploration
 
 library(tidyverse)
+
+
 
 # read in data
 dat <- read_csv("Data/Blackwood-data.csv")
